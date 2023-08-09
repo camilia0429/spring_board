@@ -1,6 +1,7 @@
 package com.fantasy.controllers.members;
 
 import com.fantasy.commons.validators.MobileValidator;
+import com.fantasy.commons.validators.PasswordValidator;
 import com.fantasy.repositories.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -9,7 +10,7 @@ import org.springframework.validation.Validator;
 
 @Component
 @RequiredArgsConstructor
-public class JoinValidator implements Validator, MobileValidator {
+public class JoinValidator implements Validator, MobileValidator, PasswordValidator {
 
     private final MemberRepository memberRepository;
     @Override
@@ -41,7 +42,13 @@ public class JoinValidator implements Validator, MobileValidator {
         }
 
         // 2. 비밀번호 복잡성 체크(알파벳(대소문자),숫자,특수문자)
+        if(userPw != null || !userPw.isBlank()
+                || (!alphaCheck(userPw, false)
+                || !numberCheck(userPw)
+                || !specialCharsCheck(userPw))) {
+            errors.rejectValue("userPw","Validation.complexity.password");
 
+        }
 
 
         // 3. 비밀번호와 비밀번호 확인 일치

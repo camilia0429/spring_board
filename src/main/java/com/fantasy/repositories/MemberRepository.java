@@ -1,7 +1,8 @@
 package com.fantasy.repositories;
 
 import com.fantasy.entities.Member;
-import org.koreait.entities.QMember;
+//import org.koreait.entities.QMember;
+import com.fantasy.entities.QMember;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 
